@@ -1,0 +1,150 @@
+/* resources/css/admin.css */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* ── Base ── */
+.admin-body {
+    min-height: 100vh;
+    background-color: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.admin-center {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+}
+
+/* ── Logo Admin ── */
+.admin-logo {
+    width: 60px;
+    height: 60px;
+    background: #1e293b;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.admin-logo svg {
+    width: 28px;
+    height: 28px;
+}
+
+.admin-label {
+    display: inline-block;
+    background: #1e293b;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 20px;
+}
+
+/* ── Card ── */
+.admin-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+}
+
+/* ── Form ── */
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.form-control {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: .6rem .9rem;
+    font-size: 14px;
+    color: #111827;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.form-control:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,.15);
+    outline: none;
+}
+
+/* ── Password wrapper ── */
+.input-password {
+    position: relative;
+}
+
+.input-password .form-control {
+    padding-right: 2.8rem;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    color: #9ca3af;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color .2s;
+}
+
+.toggle-pass:hover { color: #374151; }
+
+/* ── Button ── */
+.btn-admin {
+    background: #1e293b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    padding: .7rem;
+    transition: background .2s, transform .1s;
+}
+
+.btn-admin:hover  { background: #0f172a; color: #fff; }
+.btn-admin:active { transform: scale(.99); }
+
+/* ── Link ── */
+.link-register {
+    color: #6366f1;
+    text-decoration: none;
+}
+
+.link-register:hover { text-decoration: underline; }
+
+/* ── Strength bar ── */
+.strength-bar {
+    height: 3px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 4px;
+    transition: width .3s ease, background .3s ease;
+}
+
+.strength-label {
+    font-size: 11px;
+    margin-top: 4px;
+    color: #9ca3af;
+    min-height: 16px;
+}
