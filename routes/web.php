@@ -1,24 +1,24 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\MasyarakatAuthController;
+use App\Http\Controllers\Auth\PetugasAuthController;
 
+// ─── Halaman utama ────────────────────────────────────────────────────────────
 Route::get('/', function () {
-    return view('dashboard');
-});
-                
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    return redirect()->route('masyarakat.login');
 });
 
-require __DIR__.'/auth.php';
+// ─── Auth Masyarakat ──────────────────────────────────────────────────────────
+Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
+    Route::get('/login',    [MasyarakatAuthController::class, 'showLogin'])->name('login');
+    Route::post('/login',   [MasyarakatAuthController::class, 'login']);
+    Route::get('/register', [MasyarakatAuthController::class, 'showRegister'])->name('register');
+    Route::post('/register',[MasyarakatAuthController::class, 'register']);
+    Route::post('/logout',  [MasyarakatAuthController::class, 'logout'])->name('logout')->middleware('auth:masyarakat');
+
+    // Dashboard (contoh, dilindungi middleware)
+    Route::get('/dashboard', function () {
+        return view('auth.masyarakat.dashboard');
+    })->name('dashboard')->middleware('auth:masyarakat');
+});

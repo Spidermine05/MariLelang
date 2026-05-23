@@ -17,8 +17,6 @@ return new class extends Migration
             // Tambahan yang disarankan
             $table->string('email', 100)->unique()->nullable();
             $table->string('alamat', 255)->nullable();
-            $table->string('foto_profil', 255)->nullable();
-            $table->enum('status_akun', ['aktif', 'nonaktif', 'banned'])->default('aktif');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
