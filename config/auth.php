@@ -12,6 +12,10 @@ return [
             'driver'   => 'session',
             'provider' => 'users',
         ],
+         'petugas' => [
+            'driver'   => 'session',
+            'provider' => 'petugas',
+        ],
 
         // Guard untuk masyarakat (user umum)
         'masyarakat' => [

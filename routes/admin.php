@@ -1,28 +1,34 @@
 <?php
 
-use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\Auth\PetugasAuthController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
-// ─── Route Admin Auth (tanpa middleware) ──────────────────────────────────────
+// ── Admin Auth (publik) ───────────────────────────────────────────────────────
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get ('login',    [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login',    [AdminAuthController::class, 'login'])->name('login.post');
+    Route::get ('register', [AdminAuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('register', [AdminAuthController::class, 'register'])->name('register.post');
+    Route::post('logout',   [AdminAuthController::class, 'logout'])->name('logout');
+});
 
-    Route::middleware('admin.guest')->group(function () {
-        Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
-        Route::post('/login',   [AuthController::class, 'login']);
+// ── Admin Dashboard (dilindungi middleware admin) ─────────────────────────────
+Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+});
 
-        Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-        Route::post('/register',[AuthController::class, 'register']);
-    });
+// ── Petugas Auth (publik) ─────────────────────────────────────────────────────
+Route::prefix('petugas')->name('petugas.')->group(function () {
+    Route::get ('login',  [PetugasAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login',  [PetugasAuthController::class, 'login'])->name('login.post');
+    Route::post('logout', [PetugasAuthController::class, 'logout'])->name('logout');
+});
 
-    // ─── Route Admin yang dilindungi ───────────────────────────────────────
-    Route::middleware('admin.auth')->group(function () {
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
-
-        // Tambahkan route admin lainnya di sini
-        // Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-    });
+// ── Petugas Dashboard (dilindungi middleware petugas) ─────────────────────────
+Route::middleware('petugas')->prefix('petugas')->name('petugas.')->group(function () {
+    Route::get('dashboard', function () {
+        return view('petugas.dashboard');
+    })->name('dashboard');
 });

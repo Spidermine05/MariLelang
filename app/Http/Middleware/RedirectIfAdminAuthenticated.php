@@ -10,7 +10,8 @@ class RedirectIfAdminAuthenticated
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
+        // Jika sudah login sebagai petugas (admin), redirect ke dashboard
+        if (Auth::guard('petugas')->check()) {
             return redirect()->route('admin.dashboard');
         }
 
