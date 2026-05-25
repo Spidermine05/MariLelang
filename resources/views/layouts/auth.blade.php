@@ -32,7 +32,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--gray-50);
+            background: #ffffff;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -41,10 +41,7 @@
         }
 
         .bg-dots {
-            position: fixed; inset: 0; z-index: 0; pointer-events: none;
-            background-image: radial-gradient(circle, var(--gray-300) 1px, transparent 1px);
-            background-size: 28px 28px;
-            opacity: .4;
+            display: none;
         }
 
         /* Wrapper card */

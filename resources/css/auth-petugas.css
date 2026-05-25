@@ -10,7 +10,7 @@
     --primary-dark: #047857;
     --primary-light: #d1fae5;
 
-    --bg: #f0fdf8;
+    --bg: #ffffff;
     --card-bg: #ffffff;
     --border: #d1fae5;
     --border-focus: #059669;
@@ -39,7 +39,7 @@ body {
 /* ---------- Background ---------- */
 .auth-bg {
     min-height: 100vh;
-    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 40%, #a7f3d0 100%);
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,31 +49,15 @@ body {
 }
 
 .bg-pattern {
-    position: absolute;
-    inset: 0;
-    background-image:
-        radial-gradient(circle at 20% 20%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(5, 150, 105, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 50% 10%, rgba(110, 231, 183, 0.15) 0%, transparent 40%);
-    pointer-events: none;
+    display: none;
 }
 
 .auth-bg::before {
-    content: '';
-    position: absolute;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(5, 150, 105, 0.1);
-    top: -80px; right: -80px;
+    display: none;
 }
 
 .auth-bg::after {
-    content: '';
-    position: absolute;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(5, 150, 105, 0.08);
-    bottom: -60px; left: -60px;
+    display: none;
 }
 
 /* ---------- Card ---------- */
@@ -366,6 +350,12 @@ body {
 }
 
 .footer-link {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.footer-link-admin {
     color: var(--primary);
     font-weight: 600;
     text-decoration: none;
