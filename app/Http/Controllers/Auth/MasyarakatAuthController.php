@@ -21,6 +21,13 @@ class MasyarakatAuthController extends Controller
 
     public function login(Request $request)
     {
+        $key = 'login:' . $request->ip();
+
+        if (\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($key, 5)) {
+            $seconds = \Illuminate\Support\Facades\RateLimiter::availableIn($key);
+            return back()->withErrors(['email' => "Terlalu banyak percobaan login. Coba lagi dalam {$seconds} detik."]);
+        }
+
         $request->validate([
             'email'    => 'required|email',
             'password' => 'required|min:6',
@@ -36,8 +43,8 @@ class MasyarakatAuthController extends Controller
 
         if (Auth::guard('masyarakat')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
+            \Illuminate\Support\Facades\RateLimiter::clear($key);
 
-            // Cek status akun
             $user = Auth::guard('masyarakat')->user();
             if ($user->status_akun !== 'aktif') {
                 Auth::guard('masyarakat')->logout();
@@ -46,6 +53,8 @@ class MasyarakatAuthController extends Controller
 
             return redirect()->intended(route('masyarakat.dashboard'));
         }
+
+        \Illuminate\Support\Facades\RateLimiter::hit($key, 60);
 
         return back()
             ->withInput($request->only('email'))
@@ -80,8 +89,8 @@ class MasyarakatAuthController extends Controller
             'password.required'     => 'Password wajib diisi.',
             'password.min'          => 'Password minimal 6 karakter.',
             'password.confirmed'    => 'Konfirmasi password tidak cocok.',
-            'telp.required'         => 'Nomor Telepon sudah digunakan',
-            'telp.unique'           => 'Telpon wajib diisi',
+            'telp.required'         => 'Nomor Telepon wajib diisi.',
+            'telp.unique'           => 'Nomor Telepon sudah digunakan.',
             'alamat.required'       => 'Alamat wajib diisi',
         ]);
 

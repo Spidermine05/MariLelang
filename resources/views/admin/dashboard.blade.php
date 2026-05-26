@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin — MariLelang</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     @vite('resources/css/admin/dashboard.css')
 </head>
 <body>
@@ -43,17 +44,17 @@
             <div class="grp-title">Pengguna</div>
             <div class="stat-grid">
                 <div class="stat-card indigo">
-                    <div class="stat-icon indigo">👥</div>
+                    <div class="stat-icon indigo"><i class="bi bi-people-fill"></i></div>
                     <div class="stat-label">Total</div>
                     <div class="stat-value">{{ $stats['total_user'] }}</div>
                 </div>
                 <div class="stat-card green">
-                    <div class="stat-icon green">✅</div>
+                    <div class="stat-icon green"><i class="bi bi-check-circle-fill"></i></div>
                     <div class="stat-label">Aktif</div>
                     <div class="stat-value">{{ $stats['user_aktif'] }}</div>
                 </div>
                 <div class="stat-card red">
-                    <div class="stat-icon red">🚫</div>
+                    <div class="stat-icon red"><i class="bi bi-x-circle-fill"></i></div>
                     <div class="stat-label">Nonaktif</div>
                     <div class="stat-value">{{ $stats['user_nonaktif'] }}</div>
                 </div>
@@ -65,17 +66,17 @@
             <div class="grp-title">Barang</div>
             <div class="stat-grid">
                 <div class="stat-card blue">
-                    <div class="stat-icon blue">📦</div>
+                    <div class="stat-icon blue"><i class="bi bi-box-seam"></i></div>
                     <div class="stat-label">Total</div>
                     <div class="stat-value">{{ $stats['total_barang'] }}</div>
                 </div>
                 <div class="stat-card amber">
-                    <div class="stat-icon amber">🏷️</div>
+                    <div class="stat-icon amber"><i class="bi bi-tag-fill"></i></div>
                     <div class="stat-label">Lelang</div>
                     <div class="stat-value">{{ $stats['barang_dilelang'] }}</div>
                 </div>
                 <div class="stat-card green">
-                    <div class="stat-icon green">🎉</div>
+                    <div class="stat-icon green"><i class="bi bi-trophy-fill"></i></div>
                     <div class="stat-label">Terjual</div>
                     <div class="stat-value">{{ $stats['barang_terjual'] }}</div>
                 </div>
@@ -128,7 +129,7 @@
 
     {{-- FOOTER --}}
     <div class="footer">
-        &copy; {{ date('Y') }} <span>MariLelang</span>. All rights reserved.
+        &copy; {{ date('Y') }} <span>MariLelang</span> by <strong>PERINTIS TEAM</strong>. All rights reserved.
     </div>
 
 </div>

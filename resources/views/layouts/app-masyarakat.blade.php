@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'MariLelang')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 
@@ -19,12 +20,12 @@
         </a>
 
         {{-- Search --}}
-        <div class="ml-search-wrap">
+        <form class="ml-search-wrap" method="GET" action="{{ route('masyarakat.lelang.search') }}">
             <svg class="ml-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/>
             </svg>
-            <input type="text" class="ml-search-input" placeholder="Cari barang lelang...">
-        </div>
+            <input type="text" name="q" class="ml-search-input" placeholder="Cari barang lelang..." value="{{ request('q') }}">
+        </form>
 
         {{-- Profile Dropdown --}}
         <div class="ml-nav-right">
@@ -39,11 +40,11 @@
                         <span class="ml-dropdown-name">{{ auth('masyarakat')->user()->nama_lengkap ?? 'Pengguna' }}</span>
                         <span class="ml-dropdown-email">{{ auth('masyarakat')->user()->email ?? '' }}</span>
                     </div>
-                    <a href="#" class="ml-dropdown-item">
+                    <a href="{{ route('masyarakat.penawaran.riwayat') }}" class="ml-dropdown-item">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                         Profil
                     </a>
-                    <a href="#" class="ml-dropdown-item">
+                    <a href="{{ route('masyarakat.penawaran.riwayat') }}" class="ml-dropdown-item">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         History
                     </a>
