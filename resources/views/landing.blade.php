@@ -362,7 +362,7 @@
             <h4>Kontak</h4>
             <div class="footer-contact-item">
                 <span class="icon"><i class="bi bi-whatsapp"></i></span>
-                <a href="https://wa.me/6208628374823" target="_blank" rel="noopener noreferrer" style="color:#94A3B8; text-decoration:none;">0862-8374-823</a>
+                <a href="https://wa.me/62085188410138" target="_blank" rel="noopener noreferrer" style="color:#94A3B8; text-decoration:none;">0851-8841-0138</a>
             </div>
             <div class="footer-contact-item">
                 <span class="icon"><i class="bi bi-envelope-fill"></i></span>

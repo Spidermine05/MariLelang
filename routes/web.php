@@ -7,6 +7,7 @@ use App\Http\Controllers\Masyarakat\DashboardController as MasyarakatDashboardCo
 use App\Http\Controllers\Masyarakat\LelangController as MasyarakatLelangController;
 use App\Http\Controllers\Masyarakat\PenawaranController;
 use App\Http\Controllers\Masyarakat\LaporanController as MasyarakatLaporanController;
+use App\Http\Controllers\Masyarakat\ProfilController;
 
 // ── Landing Page ──────────────────────────────────────────────────────────────
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -41,4 +42,6 @@ Route::prefix('masyarakat')->name('masyarakat.')->middleware('auth:masyarakat')-
     // Laporan
     Route::get('/laporan',          [MasyarakatLaporanController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/export',   [MasyarakatLaporanController::class, 'exportPdf'])->name('laporan.export')->middleware('throttle:export');
+    Route::get('/profil',           [ProfilController::class, 'edit'])->name('profil.edit');
+    Route::put('/profil',           [ProfilController::class, 'update'])->name('profil.update');
 });

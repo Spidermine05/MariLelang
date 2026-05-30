@@ -22,7 +22,7 @@ class LelangController extends Controller
     public function show(int $id)
     {
         $lelang = Lelang::with(['barang.kategori', 'penawaran.masyarakat'])
-            ->where('status', 'berlangsung')
+            ->whereIn('status', ['berlangsung', 'dibuka', 'selesai'])
             ->findOrFail($id);
 
         $penawaranTertinggi = $lelang->penawaran()

@@ -96,9 +96,9 @@
             </div>
 
             @if($isBerlangsung)
-                <a href="{{ route('masyarakat.lelang.show', $item->id_lelang) }}" class="ml-btn-detail ml-btn-detail-active">Ikut Lelang</a>
+                <a href="{{ route('masyarakat.lelang.show', $item->id_lelang) }}" class="ml-btn-detail ml-btn-detail-active" style="text-decoration:none; display:block; text-align:center;">Ikut Lelang</a>
             @else
-                <a href="{{ route('masyarakat.lelang.show', $item->id_lelang) }}" class="ml-btn-detail">Lihat Detail</a>
+                <a href="{{ route('masyarakat.lelang.show', $item->id_lelang) }}" class="ml-btn-detail" style="text-decoration:none; display:block; text-align:center;">Lihat Detail</a>
             @endif
         </div>
         @empty

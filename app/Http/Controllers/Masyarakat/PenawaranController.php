@@ -16,6 +16,13 @@ class PenawaranController extends Controller
     {
         $lelang = Lelang::with('barang')->where('status', 'berlangsung')->findOrFail($lelangId);
 
+        // Cek apakah waktu lelang sudah habis
+        if ($lelang->waktu_selesai && now()->greaterThanOrEqualTo($lelang->waktu_selesai)) {
+            $lelang->update(['status' => 'selesai']);
+            return redirect()->route('masyarakat.lelang.show', $lelangId)
+                ->with('error', 'Waktu lelang sudah habis. Penawaran tidak dapat diajukan.');
+        }
+
         $tertinggi = $lelang->penawaran()->orderByDesc('harga_tawar')->value('harga_tawar')
             ?? $lelang->barang->harga_awal;
 
