@@ -9,6 +9,7 @@
 </head>
 <body style="display:flex; flex-direction:column; min-height:100vh;">
 
+{{-- NAVBAR --}}
 <nav class="navbar">
     <a href="{{ route('admin.dashboard') }}" class="navbar-brand">
         <div class="navbar-logo">ML</div>
@@ -27,27 +28,29 @@
 </nav>
 
 <div style="display:flex; flex:1;">
+    {{-- SIDEBAR --}}
     <aside style="width:220px; background:#fff; border-right:1px solid var(--border); padding:24px 0; flex-shrink:0; position:sticky; top:60px; height:calc(100vh - 60px); overflow-y:auto;">
         <nav style="display:flex; flex-direction:column; gap:4px; padding:0 12px;">
             @php
             $links = [
-                ['route'=>'admin.dashboard',      'icon'=>'<i class="bi bi-bar-chart-fill"></i>', 'label'=>'Dashboard',       'match'=>'admin.dashboard'],
-                ['route'=>'admin.users.index',     'icon'=>'<i class="bi bi-people-fill"></i>', 'label'=>'Kelola User',      'match'=>'admin.users.*'],
-                ['route'=>'admin.petugas.index',   'icon'=>'<i class="bi bi-person-badge-fill"></i>', 'label'=>'Kelola Petugas',   'match'=>'admin.petugas.*'],
-                ['route'=>'admin.barang.index',    'icon'=>'<i class="bi bi-box-seam"></i>', 'label'=>'Pendataan Barang', 'match'=>'admin.barang.*'],
-                ['route'=>'admin.kategori.index',  'icon'=>'<i class="bi bi-tag-fill"></i>', 'label'=>'Kategori',         'match'=>'admin.kategori.*'],
-                ['route'=>'admin.laporan.index',   'icon'=>'<i class="bi bi-file-earmark-text"></i>', 'label'=>'Laporan',          'match'=>'admin.laporan.*'],
+                ['route'=>'admin.dashboard',      'icon'=>'bi-bar-chart-fill',      'label'=>'Dashboard',        'match'=>'admin.dashboard'],
+                ['route'=>'admin.users.index',     'icon'=>'bi-people-fill',          'label'=>'Kelola User',       'match'=>'admin.users.*'],
+                ['route'=>'admin.petugas.index',   'icon'=>'bi-person-badge-fill',    'label'=>'Kelola Petugas',    'match'=>'admin.petugas.*'],
+                ['route'=>'admin.barang.index',    'icon'=>'bi-box-seam',             'label'=>'Pendataan Barang',  'match'=>'admin.barang.*'],
+                ['route'=>'admin.kategori.index',  'icon'=>'bi-tag-fill',             'label'=>'Kategori',          'match'=>'admin.kategori.*'],
+                ['route'=>'admin.laporan.index',   'icon'=>'bi-file-earmark-text',    'label'=>'Laporan',           'match'=>'admin.laporan.*'],
             ];
             @endphp
             @foreach($links as $link)
             @php $active = request()->routeIs($link['match']); @endphp
             <a href="{{ route($link['route']) }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none; color:{{ $active ? 'var(--brand)' : 'var(--text-muted)' }}; background:{{ $active ? 'var(--brand-light)' : 'transparent' }};">
-                {{ $link['icon'] }} {{ $link['label'] }}
+                <i class="bi {{ $link['icon'] }}"></i> {{ $link['label'] }}
             </a>
             @endforeach
         </nav>
     </aside>
 
+    {{-- CONTENT --}}
     <main style="flex:1; padding:28px; overflow-x:auto;">
         @if(session('success'))
         <div style="background:#ECFDF5; border:1px solid #6EE7B7; color:#065F46; padding:12px 16px; border-radius:8px; margin-bottom:20px; font-size:13px; font-weight:600;">
@@ -60,7 +63,7 @@
         </div>
         @endif
         @yield('content')
-        <div style="margin-top:auto; padding:16px 0; text-align:center; font-size:11px; color:var(--text-muted); border-top:1px solid var(--border);">
+        <div style="margin-top:auto; padding:16px 0; text-align:center; font-size:11px; color:var(--text-muted); border-top:1px solid var(--border); margin-top:40px;">
             &copy; {{ date('Y') }} <strong style="color:var(--brand);">MariLelang</strong> by PERINTIS TEAM. All rights reserved.
         </div>
     </main>

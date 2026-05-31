@@ -13,28 +13,34 @@
             @csrf
             @if(isset($petugas)) @method('PUT') @endif
 
-            @foreach([['nama_petugas','Nama Petugas','text'],['username','Username','text']] as [$name,$label,$type])
             <div style="margin-bottom:18px;">
-                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px;">{{ $label }}</label>
-                <input type="{{ $type }}" name="{{ $name }}" value="{{ old($name, isset($petugas) ? $petugas->$name : '') }}" maxlength="25" required style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit;">
-                @error($name) <span style="color:#DC2626; font-size:12px;">{{ $message }}</span> @enderror
+                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px;">Nama Petugas</label>
+                <input type="text" name="nama_petugas" value="{{ old('nama_petugas', $petugas->nama_petugas ?? '') }}" maxlength="25" required style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'">
+                @error('nama_petugas') <span style="color:#DC2626; font-size:12px;">{{ $message }}</span> @enderror
             </div>
-            @endforeach
 
             <div style="margin-bottom:18px;">
-                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px;">Password {{ isset($petugas) ? '(kosongkan jika tidak diubah)' : '' }}</label>
-                <input type="password" name="password" style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit;" {{ isset($petugas) ? '' : 'required' }}>
+                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px;">Username</label>
+                <input type="text" name="username" value="{{ old('username', $petugas->username ?? '') }}" maxlength="25" required style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'">
+                @error('username') <span style="color:#DC2626; font-size:12px;">{{ $message }}</span> @enderror
+            </div>
+
+            <div style="margin-bottom:18px;">
+                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px;">
+                    Password {{ isset($petugas) ? '(kosongkan jika tidak diubah)' : '' }}
+                </label>
+                <input type="password" name="password" style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'" {{ isset($petugas) ? '' : 'required' }}>
                 @error('password') <span style="color:#DC2626; font-size:12px;">{{ $message }}</span> @enderror
             </div>
 
             <div style="margin-bottom:24px;">
                 <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px;">Konfirmasi Password</label>
-                <input type="password" name="password_confirmation" style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit;">
+                <input type="password" name="password_confirmation" style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'">
             </div>
 
             <input type="hidden" name="id_level" value="{{ $levels->first()?->id_level }}">
 
-            <button type="submit" style="padding:12px 28px; background:var(--brand); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;">
+            <button type="submit" style="padding:12px 28px; background:var(--brand); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; transition:background .2s;" onmouseover="this.style.background='var(--brand-dark)'" onmouseout="this.style.background='var(--brand)'">
                 {{ isset($petugas) ? 'Simpan Perubahan' : 'Tambah Petugas' }}
             </button>
         </form>

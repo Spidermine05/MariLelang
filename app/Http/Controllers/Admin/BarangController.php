@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Kategori;
+use App\Models\Petugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -26,8 +27,9 @@ class BarangController extends Controller
 
     public function create()
     {
-        $kategori = Kategori::orderBy('nama_kategori')->get();
-        return view('admin.barang.form', compact('kategori'));
+        $kategori    = Kategori::orderBy('nama_kategori')->get();
+        $petugasList = Petugas::orderBy('nama_petugas')->get();
+        return view('admin.barang.form', compact('kategori', 'petugasList'));
     }
 
     public function store(Request $request)
@@ -38,11 +40,13 @@ class BarangController extends Controller
             'harga_awal'       => 'required|integer|min:0',
             'deskripsi_barang' => 'required|string|max:100',
             'id_kategori'      => 'required|exists:tb_kategori,id_kategori',
+            'id_petugas'       => 'nullable|exists:tb_petugas,id_petugas',
             'kondisi'          => 'required|in:baru,bekas',
             'foto_barang'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $validated['id_petugas']    = Auth::guard('petugas')->id();
+        // Default ke admin yang sedang login jika petugas tidak dipilih
+        $validated['id_petugas']    = $validated['id_petugas'] ?? Auth::guard('petugas')->id();
         $validated['status_barang'] = 'tersedia';
 
         if ($request->hasFile('foto_barang')) {
@@ -57,9 +61,10 @@ class BarangController extends Controller
 
     public function edit(int $id)
     {
-        $barang   = Barang::findOrFail($id);
-        $kategori = Kategori::orderBy('nama_kategori')->get();
-        return view('admin.barang.form', compact('barang', 'kategori'));
+        $barang      = Barang::findOrFail($id);
+        $kategori    = Kategori::orderBy('nama_kategori')->get();
+        $petugasList = Petugas::orderBy('nama_petugas')->get();
+        return view('admin.barang.form', compact('barang', 'kategori', 'petugasList'));
     }
 
     public function update(Request $request, int $id)
@@ -72,6 +77,7 @@ class BarangController extends Controller
             'harga_awal'       => 'required|integer|min:0',
             'deskripsi_barang' => 'required|string|max:100',
             'id_kategori'      => 'required|exists:tb_kategori,id_kategori',
+            'id_petugas'       => 'nullable|exists:tb_petugas,id_petugas',
             'kondisi'          => 'required|in:baru,bekas',
             'foto_barang'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
