@@ -20,12 +20,27 @@
             <div class="navbar-avatar">{{ strtoupper(substr(auth('petugas')->user()->nama_petugas, 0, 1)) }}</div>
             <span class="navbar-admin-name">{{ auth('petugas')->user()->nama_petugas }}</span>
         </div>
-        <form method="POST" action="{{ route('admin.logout') }}">
-            @csrf
-            <button type="submit" class="btn-logout">Logout</button>
-        </form>
+        <button type="button" class="btn-logout" onclick="document.getElementById('modal-logout').style.display='flex'">Logout</button>
     </div>
 </nav>
+
+{{-- MODAL LOGOUT --}}
+<div id="modal-logout" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:white; border-radius:20px; padding:36px 32px; width:100%; max-width:360px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.2);">
+        <div style="width:64px; height:64px; background:#FEE2E2; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:28px; color:#EF4444;">
+            <i class="bi bi-box-arrow-right"></i>
+        </div>
+        <h3 style="font-size:18px; font-weight:800; color:#0F172A; margin-bottom:8px;">Apa Anda yakin untuk logout?</h3>
+        <p style="font-size:13px; color:#64748B; margin-bottom:28px;">Sesi Anda akan diakhiri dan Anda perlu login kembali.</p>
+        <div style="display:flex; gap:10px;">
+            <button onclick="document.getElementById('modal-logout').style.display='none'" style="flex:1; padding:11px; border:1.5px solid #E2E8F0; border-radius:10px; font-size:14px; font-weight:700; color:#64748B; background:white; cursor:pointer; font-family:inherit;">Batal</button>
+            <form method="POST" action="{{ route('admin.logout') }}" style="flex:1;">
+                @csrf
+                <button type="submit" style="width:100%; padding:11px; border:none; border-radius:10px; font-size:14px; font-weight:700; color:white; background:#EF4444; cursor:pointer; font-family:inherit;">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div style="display:flex; flex:1;">
     {{-- SIDEBAR --}}

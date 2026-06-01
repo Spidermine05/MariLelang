@@ -29,7 +29,8 @@ class BarangController extends Controller
     {
         $kategori    = Kategori::orderBy('nama_kategori')->get();
         $petugasList = Petugas::orderBy('nama_petugas')->get();
-        return view('admin.barang.form', compact('kategori', 'petugasList'));
+        $nextId      = (Barang::max('id_barang') ?? 0) + 1;
+        return view('admin.barang.form', compact('kategori', 'petugasList', 'nextId'));
     }
 
     public function store(Request $request)
@@ -45,7 +46,6 @@ class BarangController extends Controller
             'foto_barang'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // Default ke admin yang sedang login jika petugas tidak dipilih
         $validated['id_petugas']    = $validated['id_petugas'] ?? Auth::guard('petugas')->id();
         $validated['status_barang'] = 'tersedia';
 

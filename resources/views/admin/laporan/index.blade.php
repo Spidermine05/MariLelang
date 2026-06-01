@@ -37,7 +37,8 @@
         <select name="bulan" style="padding:8px 12px; border:1px solid var(--border); border-radius:8px; font-size:13px; font-family:inherit;">
             <option value="">Semua Bulan</option>
             @foreach(range(1,12) as $m)
-            <option value="{{ $m }}" {{ request('bulan') == $m ? 'selected' : '' }}>{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
+            @php $namaBulan = \Carbon\Carbon::create()->month($m)->translatedFormat('F'); @endphp
+            <option value="{{ $m }}" {{ request('bulan') == $m ? 'selected' : '' }}>{{ $namaBulan }}</option>
             @endforeach
         </select>
     </div>
@@ -63,7 +64,7 @@
     <table style="width:100%; border-collapse:collapse; font-size:13px;">
         <thead>
             <tr style="background:var(--bg);">
-                @foreach(['Barang','Petugas','Pemenang','Harga Akhir','Tanggal Selesai'] as $h)
+                @foreach(['ID Barang','Barang','Petugas','Pemenang','Harga Akhir','Tanggal Selesai'] as $h)
                 <th style="padding:12px 16px; text-align:left; font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase;">{{ $h }}</th>
                 @endforeach
             </tr>
@@ -71,6 +72,7 @@
         <tbody>
             @forelse($lelang as $item)
             <tr style="border-top:1px solid var(--border);">
+                <td style="padding:12px 16px; font-weight:700; color:var(--text-muted); font-size:12px;">{{ $item->barang ? str_pad($item->barang->id_barang,4,'0',STR_PAD_LEFT) : '—' }}</td>
                 <td style="padding:12px 16px; font-weight:700;">{{ $item->barang?->nama_barang ?? '—' }}</td>
                 <td style="padding:12px 16px; color:var(--text-muted);">{{ $item->petugas?->nama_petugas ?? '—' }}</td>
                 <td style="padding:12px 16px;">{{ $item->pemenang?->nama_lengkap ?? '—' }}</td>
@@ -80,10 +82,10 @@
                 <td style="padding:12px 16px; color:var(--text-muted);">{{ $item->updated_at?->format('d/m/Y H:i') }}</td>
             </tr>
             @empty
-            <tr><td colspan="5" style="padding:40px; text-align:center; color:var(--text-muted);">Belum ada data lelang selesai.</td></tr>
+            <tr><td colspan="6" style="padding:40px; text-align:center; color:var(--text-muted);">Belum ada data lelang selesai.</td></tr>
             @endforelse
         </tbody>
     </table>
 </div>
-<div style="margin-top:16px;">{{ $lelang->withQueryString()->links() }}</div>
+<div style="margin-top:16px;">{{ $lelang->withQueryString()->links('vendor.pagination.custom') }}</div>
 @endsection

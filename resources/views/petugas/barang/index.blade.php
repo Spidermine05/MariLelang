@@ -16,6 +16,7 @@
     <table style="width:100%; border-collapse:collapse; font-size:13px;">
         <thead>
             <tr style="background:var(--bg);">
+                <th style="padding:12px 16px; text-align:left; font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px;">ID</th>
                 <th style="padding:12px 16px; text-align:left; font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px;">Foto</th>
                 <th style="padding:12px 16px; text-align:left; font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px;">Nama Barang</th>
                 <th style="padding:12px 16px; text-align:left; font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px;">Kategori</th>
@@ -27,6 +28,7 @@
         <tbody>
             @forelse($barang as $item)
             <tr style="border-top:1px solid var(--border);">
+                <td style="padding:12px 16px; font-weight:700; color:var(--text-muted); font-size:12px;">{{ str_pad($item->id_barang,4,'0',STR_PAD_LEFT) }}</td>
                 <td style="padding:12px 16px;">
                     <img src="{{ $item->foto_url }}" alt="" style="width:48px; height:48px; object-fit:cover; border-radius:8px; border:1px solid var(--border);">
                 </td>
@@ -55,5 +57,5 @@
         </tbody>
     </table>
 </div>
-<div style="margin-top:16px;">{{ $barang->links() }}</div>
+<div style="margin-top:16px;">{{ $barang->links('vendor.pagination.custom') }}</div>
 @endsection

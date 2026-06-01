@@ -213,10 +213,20 @@
 }
 </style>
 <script>
+let reloaded = sessionStorage.getItem('reloaded_{{ $lelang->id_lelang }}');
+
 function updateCountdowns(){
     document.querySelectorAll('.countdown[data-end]').forEach(el => {
         const d = new Date(el.dataset.end) - Date.now();
-        if (d <= 0) { el.textContent = 'Waktu habis'; return; }
+        if (d <= 0) {
+            el.textContent = 'Waktu habis';
+            if (!reloaded) {
+                reloaded = true;
+                sessionStorage.setItem('reloaded_{{ $lelang->id_lelang }}', '1');
+                location.reload();
+            }
+            return;
+        }
         const h = Math.floor(d/3600000),
               m = Math.floor(d%3600000/60000),
               s = Math.floor(d%60000/1000);

@@ -45,5 +45,5 @@
         </tbody>
     </table>
 </div>
-<div style="margin-top:16px;">{{ $lelang->links() }}</div>
+<div style="margin-top:16px;">{{ $lelang->links('vendor.pagination.custom') }}</div>
 @endsection

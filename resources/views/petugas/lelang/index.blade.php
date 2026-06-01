@@ -21,12 +21,22 @@
         <tbody>
             @forelse($lelang as $item)
             @php
+                $waktuHabis = $item->status === 'berlangsung'
+                    && $item->waktu_selesai
+                    && now()->greaterThanOrEqualTo($item->waktu_selesai);
+
                 $statusMap = [
-                    'dibuka'=>['#EFF6FF','#2563EB','<i class="bi bi-circle-fill"></i> Dibuka'],
-                    'berlangsung'=>['#ECFDF5','#059669','<i class="bi bi-circle-fill"></i> Berlangsung'],
-                    'ditutup'=>['#F1F5F9','#64748B','<i class="bi bi-circle-fill"></i> Ditutup']
+                    'dibuka'      => ['#EFF6FF','#2563EB','<i class="bi bi-circle-fill"></i> Dibuka'],
+                    'berlangsung' => ['#ECFDF5','#059669','<i class="bi bi-circle-fill"></i> Berlangsung'],
+                    'ditutup'     => ['#F1F5F9','#64748B','<i class="bi bi-circle-fill"></i> Ditutup'],
                 ];
-                [$bg,$fg,$label] = $statusMap[$item->status] ?? ['#F1F5F9','#64748B',$item->status];
+
+                if ($waktuHabis) {
+                    $bg = '#FEF3C7'; $fg = '#92400E';
+                    $label = '<i class="bi bi-clock-fill"></i> Waktu Habis';
+                } else {
+                    [$bg,$fg,$label] = $statusMap[$item->status] ?? ['#F1F5F9','#64748B',$item->status];
+                }
             @endphp
             <tr style="border-top:1px solid var(--border);">
                 <td style="padding:12px 16px; font-weight:700;">{{ $item->barang?->nama_barang ?? '—' }}</td>
@@ -58,5 +68,5 @@
         </tbody>
     </table>
 </div>
-<div style="margin-top:16px;">{{ $lelang->links() }}</div>
+<div style="margin-top:16px;">{{ $lelang->links('vendor.pagination.custom') }}</div>
 @endsection

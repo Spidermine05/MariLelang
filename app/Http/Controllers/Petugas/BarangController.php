@@ -27,8 +27,9 @@ class BarangController extends Controller
 
     public function create()
     {
-        $kategori = Kategori::orderBy('nama_kategori')->get();
-        return view('petugas.barang.form', compact('kategori'));
+        $kategori  = Kategori::orderBy('nama_kategori')->get();
+        $nextId    = (Barang::max('id_barang') ?? 0) + 1;
+        return view('petugas.barang.form', compact('kategori', 'nextId'));
     }
 
     public function store(Request $request)

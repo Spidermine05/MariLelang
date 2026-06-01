@@ -13,6 +13,14 @@
             @csrf
             @if(isset($barang)) @method('PUT') @endif
 
+            {{-- ID Barang --}}
+            <div style="margin-bottom:18px;">
+                <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase;">ID Barang</label>
+                <input type="text" value="{{ isset($barang) ? str_pad($barang->id_barang,4,'0',STR_PAD_LEFT) : str_pad($nextId,4,'0',STR_PAD_LEFT) }}" readonly
+                    style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; background:#F8FAFC; color:var(--text-muted); cursor:not-allowed;">
+                <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">ID otomatis, tidak dapat diubah.</div>
+            </div>
+
             <div style="margin-bottom:18px;">
                 <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase;">Nama Barang</label>
                 <input type="text" name="nama_barang" value="{{ old('nama_barang', $barang->nama_barang ?? '') }}" maxlength="25" required style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; outline:none;" onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'">

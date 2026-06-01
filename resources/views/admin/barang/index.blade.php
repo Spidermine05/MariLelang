@@ -22,7 +22,7 @@
     <table style="width:100%; border-collapse:collapse; font-size:13px;">
         <thead>
             <tr style="background:var(--bg);">
-                @foreach(['Foto','Nama Barang','Kategori','Petugas','Harga Awal','Status','Aksi'] as $h)
+                @foreach(['ID','Foto','Nama Barang','Kategori','Petugas','Harga Awal','Status','Aksi'] as $h)
                 <th style="padding:12px 16px; text-align:left; font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase;">{{ $h }}</th>
                 @endforeach
             </tr>
@@ -30,8 +30,9 @@
         <tbody>
             @forelse($barang as $item)
             <tr style="border-top:1px solid var(--border);">
-                <td style="padding:12px 16px;">
-                    <img src="{{ $item->foto_url }}" style="width:44px; height:44px; object-fit:cover; border-radius:6px; border:1px solid var(--border);">
+                <td style="padding:12px 16px; font-weight:700; color:var(--text-muted); font-size:12px;">{{ str_pad($item->id_barang,4,'0',STR_PAD_LEFT) }}</td>
+                <td style="padding:12px 16px; width:68px;">
+                    <img src="{{ $item->foto_url }}" style="width:44px; height:44px; min-width:44px; max-width:44px; object-fit:cover; border-radius:6px; border:1px solid var(--border); display:block;">
                 </td>
                 <td style="padding:12px 16px; font-weight:700;">{{ $item->nama_barang }}</td>
                 <td style="padding:12px 16px; color:var(--text-muted);">{{ $item->kategori?->nama_kategori ?? '—' }}</td>
@@ -62,5 +63,5 @@
         </tbody>
     </table>
 </div>
-<div style="margin-top:16px;">{{ $barang->withQueryString()->links() }}</div>
+<div style="margin-top:16px;">{{ $barang->withQueryString()->links('vendor.pagination.custom') }}</div>
 @endsection

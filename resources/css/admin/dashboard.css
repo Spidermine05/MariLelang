@@ -294,3 +294,14 @@ body {
     .main { padding: 0 16px 24px; }
     .navbar { padding: 0 16px; }
 }
+/* ── PAGINATION ── */
+.pagination { display:flex; gap:4px; list-style:none; padding:0; margin:0; flex-wrap:wrap; }
+.pagination .page-item .page-link {
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:5px 11px; font-size:12px; font-weight:600; border-radius:6px;
+    border:1px solid var(--border); background:white; color:var(--text-muted);
+    text-decoration:none; line-height:1; transition:all .15s;
+}
+.pagination .page-item.active .page-link { background:var(--brand); border-color:var(--brand); color:white; }
+.pagination .page-item.disabled .page-link { opacity:.45; pointer-events:none; }
+.pagination .page-item .page-link:hover:not(.active) { background:var(--brand-light); color:var(--brand); border-color:var(--brand); }
