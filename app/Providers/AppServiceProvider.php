@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->loadMigrationsFrom(base_path('config/database/migrations'));
+        // $this->loadMigrationsFrom(base_path('config/database/migrations'));
     }
 
     public function boot(): void
