@@ -74,7 +74,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($lelang->penawaran->sortByDesc('harga_tawar') as $i => $p)
+                        @forelse($lelang->penawaran->sortByDesc('harga_tawar')->values() as $i => $p)
                         <tr style="border-top:1px solid #F1F5F9; {{ $i===0 ? 'background:#FFFBEB;' : '' }}">
                             <td style="padding:10px 16px; color:#94A3B8; font-weight:700;">
                                 {{ $i === 0 ? '🏆' : ($i + 1) }}
