@@ -14,7 +14,7 @@
             {{ strtoupper(substr($user->nama_lengkap, 0, 1)) }}
         </div>
         <div style="font-size:18px; font-weight:800; margin-bottom:4px;">{{ $user->nama_lengkap }}</div>
-        <div style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">@{{ $user->username }}</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">{{ $user->username }}</div>
 
         @if($user->status_akun === 'aktif')
         <span style="background:#ECFDF5; color:#059669; padding:4px 12px; border-radius:50px; font-size:12px; font-weight:700; display:inline-block;">

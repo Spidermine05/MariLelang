@@ -35,11 +35,12 @@ body {
 /* ─── Navbar ────────────────────────────────────── */
 .ml-navbar {
     background: var(--ml-primary);
-    height: 56px;
+    height: 60px;
     position: sticky;
     top: 0;
     z-index: 50;
     box-shadow: 0 2px 8px rgba(82,97,200,.25);
+    overflow: visible;
 }
 .ml-navbar-inner {
     max-width: 1200px;

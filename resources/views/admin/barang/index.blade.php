@@ -49,10 +49,9 @@
                     <div style="display:flex; gap:6px;">
                         <a href="{{ route('admin.barang.edit', $item->id_barang) }}" style="padding:5px 10px; background:#EEF2FF; color:var(--brand); border-radius:6px; font-size:12px; font-weight:700; text-decoration:none;">Edit</a>
                         @if($item->status_barang === 'tersedia')
-                        <form method="POST" action="{{ route('admin.barang.destroy', $item->id_barang) }}" onsubmit="return confirm('Hapus barang ini?')">
-                            @csrf @method('DELETE')
-                            <button type="submit" style="padding:5px 10px; background:#FEF2F2; color:#DC2626; border:none; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit;">Hapus</button>
-                        </form>
+                        <button type="button"
+                            onclick="bukaMHapus('{{ route('admin.barang.destroy', $item->id_barang) }}')"
+                            style="padding:5px 10px; background:#FEF2F2; color:#DC2626; border:none; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit;">Hapus</button>
                         @endif
                     </div>
                 </td>
@@ -64,4 +63,34 @@
     </table>
 </div>
 <div style="margin-top:16px;">{{ $barang->withQueryString()->links('vendor.pagination.custom') }}</div>
+
+{{-- MODAL HAPUS BARANG --}}
+<div id="modal-hapus" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:white; border-radius:20px; padding:36px 32px; width:100%; max-width:360px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.2);">
+        <div style="width:64px; height:64px; background:#FEE2E2; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:28px; color:#EF4444;">
+            <i class="bi bi-trash3"></i>
+        </div>
+        <h3 style="font-size:18px; font-weight:800; color:#0F172A; margin-bottom:8px;">Hapus Barang?</h3>
+        <p style="font-size:13px; color:#64748B; margin-bottom:28px;">Data barang akan dihapus secara permanen dan tidak dapat dikembalikan.</p>
+        <div style="display:flex; gap:10px;">
+            <button onclick="document.getElementById('modal-hapus').style.display='none'" style="flex:1; padding:11px; border:1.5px solid #E2E8F0; border-radius:10px; font-size:14px; font-weight:700; color:#64748B; background:white; cursor:pointer; font-family:inherit;">Batal</button>
+            <form id="form-hapus" method="POST" style="flex:1;">
+                @csrf @method('DELETE')
+                <button type="submit" style="width:100%; padding:11px; border:none; border-radius:10px; font-size:14px; font-weight:700; color:white; background:#EF4444; cursor:pointer; font-family:inherit;">
+                    <i class="bi bi-trash3"></i> Hapus
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function bukaMHapus(url) {
+    document.getElementById('form-hapus').action = url;
+    document.getElementById('modal-hapus').style.display = 'flex';
+}
+document.getElementById('modal-hapus').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+});
+</script>
 @endsection

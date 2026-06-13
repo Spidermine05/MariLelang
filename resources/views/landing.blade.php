@@ -354,8 +354,6 @@
             <ul>
                 <li><a href="{{ route('masyarakat.register') }}"><i class="bi bi-person-plus"></i> Daftar Masyarakat</a></li>
                 <li><a href="{{ route('masyarakat.login') }}"><i class="bi bi-box-arrow-in-right"></i> Masuk</a></li>
-                <li><a href="{{ route('petugas.login') }}"><i class="bi bi-person-badge"></i> Portal Petugas</a></li>
-                <li><a href="{{ route('admin.login') }}"><i class="bi bi-shield-lock"></i> Portal Admin</a></li>
             </ul>
         </div>
         <div class="footer-col">

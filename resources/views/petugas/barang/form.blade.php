@@ -9,7 +9,7 @@
     </div>
 
     <div style="background:white; border-radius:12px; border:1px solid var(--border); padding:28px;">
-        <form method="POST" action="{{ isset($barang) ? route('petugas.barang.update', $barang->id_barang) : route('petugas.barang.store') }}" enctype="multipart/form-data">
+        <form id="form-edit-barang" method="POST" action="{{ isset($barang) ? route('petugas.barang.update', $barang->id_barang) : route('petugas.barang.store') }}" enctype="multipart/form-data">
             @csrf
             @if(isset($barang)) @method('PUT') @endif
 
@@ -92,10 +92,52 @@
                 @error('foto_barang') <span style="color:#DC2626; font-size:12px;">{{ $message }}</span> @enderror
             </div>
 
-            <button type="submit" style="padding:12px 28px; background:var(--brand); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;">
-                {{ isset($barang) ? 'Simpan Perubahan' : 'Tambah Barang' }}
+            @if(isset($barang))
+            <button type="button" onclick="document.getElementById('modal-simpan').style.display='flex'" style="padding:12px 28px; background:var(--brand); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;">
+                Simpan Perubahan
             </button>
+            @else
+            <button type="button" onclick="document.getElementById('modal-tambah').style.display='flex'" style="padding:12px 28px; background:var(--brand); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;">
+                <i class="bi bi-plus-lg"></i> Tambah Barang
+            </button>
+            @endif
         </form>
+    </div>
+</div>
+
+{{-- MODAL TAMBAH BARANG --}}
+<div id="modal-tambah" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:white; border-radius:20px; padding:36px 32px; width:100%; max-width:360px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.2);">
+        <div style="width:64px; height:64px; background:#F0FDF4; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:28px; color:#16A34A;">
+            <i class="bi bi-box-seam"></i>
+        </div>
+        <h3 style="font-size:18px; font-weight:800; color:#0F172A; margin-bottom:8px;">Tambah Barang?</h3>
+        <p style="font-size:13px; color:#64748B; margin-bottom:28px;">Pastikan semua data barang sudah benar sebelum ditambahkan ke sistem.</p>
+        <div style="display:flex; gap:10px;">
+            <button onclick="document.getElementById('modal-tambah').style.display='none'" style="flex:1; padding:11px; border:1.5px solid #E2E8F0; border-radius:10px; font-size:14px; font-weight:700; color:#64748B; background:white; cursor:pointer; font-family:inherit;">
+                Batal
+            </button>
+            <button onclick="document.getElementById('form-edit-barang').submit()" style="flex:1; padding:11px; border:none; border-radius:10px; font-size:14px; font-weight:700; color:white; background:#16A34A; cursor:pointer; font-family:inherit;">
+                <i class="bi bi-check-lg"></i> Ya, Tambah
+            </button>
+        </div>
+    </div>
+</div>
+
+{{-- MODAL SIMPAN PERUBAHAN --}}
+<div id="modal-simpan" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:white; border-radius:20px; padding:36px 32px; width:100%; max-width:360px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.2);">
+        <div style="width:64px; height:64px; background:#EEF2FF; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:28px; color:var(--brand);">
+            <i class="bi bi-floppy"></i>
+        </div>
+        <h3 style="font-size:18px; font-weight:800; color:#0F172A; margin-bottom:8px;">Simpan Perubahan?</h3>
+        <p style="font-size:13px; color:#64748B; margin-bottom:28px;">Perubahan data barang akan disimpan dan tidak dapat dibatalkan.</p>
+        <div style="display:flex; gap:10px;">
+            <button onclick="document.getElementById('modal-simpan').style.display='none'" style="flex:1; padding:11px; border:1.5px solid #E2E8F0; border-radius:10px; font-size:14px; font-weight:700; color:#64748B; background:white; cursor:pointer; font-family:inherit;">Batal</button>
+            <button onclick="document.getElementById('form-edit-barang').submit()" style="flex:1; padding:11px; border:none; border-radius:10px; font-size:14px; font-weight:700; color:white; background:var(--brand); cursor:pointer; font-family:inherit;">
+                <i class="bi bi-floppy"></i> Simpan
+            </button>
+        </div>
     </div>
 </div>
 
@@ -107,5 +149,11 @@ function previewImg(input) {
         preview.style.display = 'block';
     }
 }
+document.getElementById('modal-simpan') && document.getElementById('modal-simpan').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+});
+document.getElementById('modal-tambah').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+});
 </script>
 @endsection
