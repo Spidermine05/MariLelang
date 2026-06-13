@@ -12,10 +12,9 @@
         <div>
             {{-- Foto & Info Barang --}}
             <div style="background:white; border-radius:16px; border:1px solid #E2E8F0; overflow:hidden; margin-bottom:20px; box-shadow:0 2px 12px #0000000a;">
-                <div style="height:280px; background:linear-gradient(135deg,#EEF2FF,#E0E7FF); display:flex; align-items:center; justify-content:center; position:relative;">
+                <div style="height:280px; background:linear-gradient(135deg,#EEF2FF,#E0E7FF); overflow:hidden; position:relative;">
                     @if($lelang->barang->foto_barang)
-                        <img src="{{ asset('storage/barang/' . $lelang->barang->foto_barang) }}" style="width:100%; height:100%; object-fit:cover;">
-                    @else
+                        <img src="{{ $lelang->barang->foto_url }}" style="width:100%; height:280px; object-fit:cover; display:block;">
                         <i class="bi bi-tag-fill" style="font-size:72px; color:#A5B4FC;"></i>
                     @endif
                     {{-- Status badge di atas foto --}}

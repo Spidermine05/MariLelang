@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\BarangSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -44,5 +45,10 @@ class DatabaseSeeder extends Seeder
             ['nama_kategori' => 'Kendaraan',        'deskripsi_kategori' => 'Motor, mobil, dan kendaraan lainnya',        'created_at' => now(), 'updated_at' => now()],
             ['nama_kategori' => 'Lainnya',          'deskripsi_kategori' => 'Kategori umum lainnya',                     'created_at' => now(), 'updated_at' => now()],
         ]);
+
+        $this->call([
+        BarangSeeder::class,
+        ]);
     }
+    
 }

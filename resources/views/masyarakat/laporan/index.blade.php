@@ -54,6 +54,6 @@
             </tbody>
         </table>
     </div>
-    <div style="margin-top:16px;">{{ $penawaran->links() }}</div>
+    <div style="margin-top:16px;">{{ $penawaran->links('vendor.pagination.custom') }}</div>
 </div>
 @endsection
