@@ -89,7 +89,7 @@
                                 type="text"
                                 name="username"
                                 class="form-input @error('username') input-error @enderror"
-                                placeholder="Username unik"
+                                placeholder="Username"
                                 value="{{ old('username') }}"
                                 maxlength="25"
                                 required

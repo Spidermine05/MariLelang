@@ -23,7 +23,7 @@
                     PORTAL ADMINISTRATOR
                 </div>
                 <h1 class="header-title">Masuk Akun</h1>
-                <p class="header-subtitle">Kelola sistem lelang dengan akses penuh</p>
+                <p class="header-subtitle">Kelola sistem MariLelang dengan akses penuh</p>
             </div>
 
             {{-- Disclaimer --}}
@@ -84,7 +84,7 @@
                             type="text"
                             name="username"
                             class="form-input @error('username') input-error @enderror"
-                            placeholder="Masukkan username admin"
+                            placeholder="Masukkan username"
                             value="{{ old('username') }}"
                             autocomplete="username"
                             required
@@ -141,7 +141,6 @@
             <div class="card-footer">
                 <p>Belum punya akun? <a href="{{ route('admin.register') }}" class="footer-link">Daftar Administrator</a></p>
                 <p>Login sebagai petugas? <a href="{{ route('petugas.login') }}" class="footer-link">Portal Petugas</a></p>
-                <p>Bukan petugas? <a href="{{ route('masyarakat.login') }}" class="footer-link">Login Masyarakat</a></p>
             </div>
 
         </div>
