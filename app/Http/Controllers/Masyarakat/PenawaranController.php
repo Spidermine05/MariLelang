@@ -19,7 +19,10 @@ class PenawaranController extends Controller
         $tertinggi = $lelang->penawaran()->orderByDesc('harga_tawar')->value('harga_tawar')
             ?? $lelang->barang->harga_awal;
 
-        $minBid = $tertinggi + $lelang->harga_minimal_bid;
+        $sudahAdaBid = $lelang->penawaran()->exists();
+        $minKenaikan = $sudahAdaBid ? max(1, $lelang->harga_minimal_bid) : 0;
+        $minBid      = $tertinggi + $minKenaikan;
+        // $minBid = $tertinggi + $lelang->harga_minimal_bid;
 
         $request->validate([
             'harga_tawar' => ['required', 'integer', 'min:' . $minBid],
